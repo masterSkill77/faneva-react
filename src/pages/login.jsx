@@ -1,4 +1,25 @@
+import { useState } from 'react';
+import { AuthService } from '../services/auth.service';
+
 export const Login = () => {
+	const user = AuthService().isConnected();
+	const [email, setEmail] = useState();
+	const [password, setPassword] = useState();
+	if (user) {
+		window.location.href = '/';
+		return true;
+	}
+
+	const login = async (e) => {
+		e.preventDefault();
+		await AuthService()
+			.login(email, password)
+			.then(({ data }) => {
+				AuthService().storeUser(data);
+				setTimeout(() => (window.location.href = '/'), 1000);
+			})
+			.catch((e) => alert('Email ou mot de passe incorrect'));
+	};
 	return (
 		<div className='container-fluid page-body-wrapper full-page-wrapper'>
 			<div className='content-wrapper d-flex align-items-center auth px-0'>
@@ -17,6 +38,7 @@ export const Login = () => {
 										className='form-control form-control-lg'
 										id='exampleInputEmail1'
 										placeholder='Username'
+										onChange={(e) => setEmail(e.target.value)}
 									/>
 								</div>
 								<div className='form-group'>
@@ -25,10 +47,12 @@ export const Login = () => {
 										className='form-control form-control-lg'
 										id='exampleInputPassword1'
 										placeholder='Password'
+										onChange={(e) => setPassword(e.target.value)}
 									/>
 								</div>
 								<div className='mt-3'>
 									<a
+										onClick={(e) => login(e)}
 										className='btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn'
 										href='/'>
 										SIGN IN
@@ -41,16 +65,9 @@ export const Login = () => {
 											Keep me signed in
 										</label>
 									</div>
-									<a href='#' className='auth-link text-black'>
+									<a href='/' className='auth-link text-black'>
 										Forgot password?
 									</a>
-								</div>
-								<div className='mb-2'>
-									<button
-										type='button'
-										className='btn btn-block btn-facebook auth-form-btn'>
-										<i className='ti-facebook me-2'></i>Connect using facebook
-									</button>
 								</div>
 								<div className='text-center mt-4 fw-light'>
 									Don't have an account?{' '}
