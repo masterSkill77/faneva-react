@@ -1,13 +1,33 @@
 import { useState } from 'react';
+import { AuthService } from '../../services/auth.service';
+import { EditorService } from '../../services/editor.service';
 
 export const EditorCreate = () => {
 	const role = 755;
 	const status = 1;
+	const { utilisateur: organisation } = AuthService().isConnected();
 	const [isSubmiting, setIsSubmiting] = useState(false);
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
 	const [editorName, setEditorName] = useState();
 	const [editorFirstname, setEditorFirstname] = useState();
+
+	const registerEditor = async () => {
+		setIsSubmiting(true);
+		const data = {
+			role,
+			status,
+			name_editor: editorName,
+			firstname_editor: editorFirstname,
+			email,
+			password,
+		};
+		const response = await EditorService().createEditor(organisation.id, data);
+		setTimeout(() => {
+			setIsSubmiting(false);
+			window.location.href = '/editor/list';
+		});
+	};
 	return (
 		<div className='d-flex justify-content-center'>
 			<div className='col-md-6 grid-margin stretch-card'>
@@ -60,12 +80,15 @@ export const EditorCreate = () => {
 							<button
 								className='btn btn-success me-2'
 								type='button'
+								onClick={(e) => registerEditor(e)}
 								disabled={isSubmiting}>
 								Enregistrer
-								<span
-									className='spinner-border spinner-border-sm ml-2'
-									role='status'
-									aria-hidden='true'></span>
+								{isSubmiting && (
+									<span
+										className='spinner-border spinner-border-sm ml-2'
+										role='status'
+										aria-hidden='true'></span>
+								)}
 							</button>
 
 							<button className='btn btn-light'>Annuler</button>
