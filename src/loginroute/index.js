@@ -3,27 +3,17 @@ import { Organisation } from './../pages/organisation';
 import { EditorList } from './../pages/editor/editor-list';
 import { EditorCreate } from '../pages/editor/editor-create';
 import Inscription from '../pages/Inscription';
-const router = createBrowserRouter([
+import { Login } from '../pages/login';
+const loginroute = createBrowserRouter([
 	{
 		path: '/',
-		element: <>Hello</>,
+		element: <Login />,
 	},
-	{
-		path: '/organisation/:type',
-		element: <Organisation />,
-	},
-	{
-		path: '/editors/list',
-		element: <EditorList />,
-	},
-	{
-		path: '/editors/create',
-		element: <EditorCreate />,
-	},
+	
 
 	{
 		path: '/inscription',
 		element: <Inscription />,
 	},
 ]);
-export default router;
+export default loginroute;
