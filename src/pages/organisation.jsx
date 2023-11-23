@@ -35,8 +35,8 @@ export const Organisation = () => {
 										<tr>
 											<th>Logo</th>
 											<th>Type</th>
-											<th>Sigle</th>
-											<th>Secteur</th>
+											<th>Nom Organisation</th>
+						
 											<th>Email</th>
 											<th>Téléphone</th>
 											<th>Site web</th>
@@ -58,9 +58,11 @@ export const Organisation = () => {
 														}}>
 														{item.role}{' '}
 														<img
-															style={{ width: 100, height: 80 }}
-															src={'http://localhost:8000/' + item.logo_org}
-															alt='my im'
+															style={{ width: 120, height: 80 }}
+															src={item.logo_org}
+															alt='This is a background'
+															className='img-fluid'
+
 														/>
 													</td>
 													<td
@@ -75,12 +77,7 @@ export const Organisation = () => {
 														}}>
 														{item.nom_org}
 													</td>
-													<td
-														style={{
-															padding: '10px',
-														}}>
-														{item.secteur_activite.nom_sect_act}
-													</td>
+													
 													<td
 														style={{
 															padding: '10px',
@@ -131,13 +128,17 @@ export const Organisation = () => {
 														{' '}
 														<img
 															style={{ width: 120, height: 80 }}
-															src={'http://localhost:8000/' + item.imgStat}
-															alt='my item'
+															src={item.imgStat}
+															alt='This is a background'
+															className='img-fluid'
+
 														/>{' '}
 														<img
-															alt='my item'
 															style={{ width: 120, height: 80 }}
-															src={'http://localhost:8000/' + item.imgStat}
+															src={item.imgNif}
+															alt='This is a background'
+															className='img-fluid'
+
 														/>
 													</td>
 													{type === 'in-process' && (
