@@ -1,0 +1,47 @@
+.inscription-title {
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    background: linear-gradient(45deg, #FFD700, #FFA500, #87CEFA);
+    background-size: 200% 200%;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: rainbow 3s ease infinite;
+  }
+  
+  @keyframes rainbow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .inscription-image {
+    width: 100px; /* Ajustez la largeur selon vos besoins */
+    height: 70px; /* Ajustez la hauteur selon vos besoins */
+    position: relative;
+    left: 50%; /* Place l'image au centre horizontalement */
+    transform-origin: center;
+    animation: tilt 2s ease-in-out infinite;
+  }
+  
+  @keyframes tilt {
+    0% {
+      transform: translateX(-50%) rotate(-5deg); /* Inclinaison initiale */
+    }
+    50% {
+      transform: translateX(-50%) rotate(5deg); /* Inclinaison maximale */
+    }
+    100% {
+      transform: translateX(-50%) rotate(-5deg); /* Inclinaison finale */
+    }
+  }
+  
+  
+  

@@ -2,10 +2,11 @@ import './App.css';
 import { RouterProvider } from 'react-router-dom';
 import router from './router';
 import { Sidebar } from './components/themes/Sidebar';
+import Navbarlogin from './components/themes/Navbarlogin';
 import { Navbar } from './components/themes/Navbar';
 import { AuthService } from './services/auth.service';
 import { Login } from './pages/login';
-
+import loginroute from './loginroute';
 function App() {
 	const user = AuthService().isConnected();
 	return (
@@ -23,7 +24,15 @@ function App() {
 					</div>
 				</>
 			)}
-			{!user && <Login />}
+			{!user && (
+				<>
+					<Navbarlogin />
+					<div className='content-wrapper'>
+
+						<RouterProvider router={loginroute} />
+					</div>
+				</>
+			)}
 		</div>
 	);
 }

@@ -25,12 +25,12 @@ export const Login = () => {
 			<div className='content-wrapper d-flex align-items-center auth px-0'>
 				<div className='row w-100 mx-0'>
 					<div className='col-lg-4 mx-auto'>
-						<div className='auth-form-light text-left py-5 px-4 px-sm-5'>
+						<div className='auth-form-light text-center py-5 px-4 px-sm-5'>
 							<div className='brand-logo'>
-								<img src='/images/logo.svg' alt='logo' />
+								<img src='/images/Efianara.png' alt='logo' />
 							</div>
-							<h4>Hello! let's get started</h4>
-							<h6 className='fw-light'>Sign in to continue.</h6>
+							<h4>Bonjour! Commençons</h4>
+							<h6 className='fw-light'>Connectez-vous pour continuer.</h6>
 							<form className='pt-3'>
 								<div className='form-group'>
 									<input
@@ -54,25 +54,15 @@ export const Login = () => {
 									<a
 										onClick={(e) => login(e)}
 										className='btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn'
-										href='/'>
-										SIGN IN
+										href='/Inscription'>
+										SE CONNECTER
 									</a>
 								</div>
-								<div className='my-2 d-flex justify-content-between align-items-center'>
-									<div className='form-check'>
-										<label className='form-check-label text-muted'>
-											<input type='checkbox' className='form-check-input' />
-											Keep me signed in
-										</label>
-									</div>
-									<a href='/' className='auth-link text-black'>
-										Forgot password?
-									</a>
-								</div>
+
 								<div className='text-center mt-4 fw-light'>
-									Don't have an account?{' '}
-									<a href='register.html' className='text-primary'>
-										Create
+									Je n'ai pas de compte?{' '}
+									<a href='inscription' className='text-primary'>
+										Créer
 									</a>
 								</div>
 							</form>
