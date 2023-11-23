@@ -47,6 +47,7 @@ const Navbarlogin = () => {
         <img
           alt="Logo"
           // src={logo2}
+          src='/images/Efianara.png'
           width="60"
           className="d-inline-block align-top"
         />
