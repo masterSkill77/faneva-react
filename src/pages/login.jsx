@@ -25,7 +25,7 @@ export const Login = () => {
 			<div className='content-wrapper d-flex align-items-center auth px-0'>
 				<div className='row w-100 mx-0'>
 					<div className='col-lg-4 mx-auto'>
-						<div className='auth-form-light text-left py-5 px-4 px-sm-5'>
+						<div className='auth-form-light text-center py-5 px-4 px-sm-5'>
 							<div className='brand-logo'>
 								<img src='/images/Efianara.png' alt='logo' />
 							</div>
@@ -58,9 +58,9 @@ export const Login = () => {
 										SE CONNECTER
 									</a>
 								</div>
-								
+
 								<div className='text-center mt-4 fw-light'>
-								Je n'ai pas de compte?{' '}
+									Je n'ai pas de compte?{' '}
 									<a href='inscription' className='text-primary'>
 										Créer
 									</a>

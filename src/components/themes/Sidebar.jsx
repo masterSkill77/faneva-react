@@ -26,12 +26,14 @@ export const Sidebar = () => {
 							</a>
 							<div className='collapse' id='ui-basic'>
 								<ul className='nav flex-column sub-menu'>
-									<li className='nav-item'>
-										{' '}
-										<a className='nav-link' href='/offer/create'>
-											Création
-										</a>
-									</li>
+									{user.user.role === 755 && (
+										<li className='nav-item'>
+											{' '}
+											<a className='nav-link' href='/offer/create'>
+												Création
+											</a>
+										</li>
+									)}
 									<li className='nav-item'>
 										{' '}
 										<a className='nav-link' href='/offer/list'>
