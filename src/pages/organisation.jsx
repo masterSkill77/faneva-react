@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { OrganisationService } from '../services/organisation.service';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 export const Organisation = () => {
 	const { type } = useParams();
@@ -20,7 +22,10 @@ export const Organisation = () => {
 			.validateOrganisation(itemId)
 			.then(() => window.location.reload())
 			.finally(() => setIsLoading(false));
+		
+			
 	};
+	
 	return (
 		organisations && (
 			<>
@@ -36,15 +41,12 @@ export const Organisation = () => {
 											<th>Logo</th>
 											<th>Type</th>
 											<th>Nom Organisation</th>
-						
 											<th>Email</th>
 											<th>Téléphone</th>
-											<th>Site web</th>
-											<th>Création</th>
 											<th>NIF/STAT</th>
-											<th>Statut légal</th>
-											<th>Adresse</th>
-											<th>Dossier</th>
+											<th>Photo STAT</th>
+											<th>Photo NIF</th>
+											
 											{type === 'in-process' && <th>Action</th>}
 										</tr>
 									</thead>
@@ -58,7 +60,7 @@ export const Organisation = () => {
 														}}>
 														{item.role}{' '}
 														<img
-															style={{ width: 120, height: 80 }}
+															style={{ width: 100, height: 80 }}
 															src={item.logo_org}
 															alt='This is a background'
 															className='img-fluid'
@@ -90,51 +92,36 @@ export const Organisation = () => {
 														}}>
 														{item.telephone_org}
 													</td>
-													<td
-														style={{
-															padding: '10px',
-														}}>
-														{item.siteweb_org}
-													</td>
-													<td
-														style={{
-															padding: '10px',
-														}}>
-														{item.date_creation}
-													</td>
+													
+													
 													<td
 														style={{
 															padding: '10px',
 														}}>
 														NIF/STAT : {item.num_nif} /{item.num_stat}
 													</td>
+												
+												
 													<td
 														style={{
 															padding: '10px',
 														}}>
-														{item.statut_legal_org}
-													</td>
-													<td
-														style={{
-															padding: '10px',
-														}}>
-														{item.adresse}, {item.region} - {item.province}{' '}
-														{item.code_postal}
-													</td>
-													<td
-														style={{
-															padding: '10px',
-														}}>
-														{' '}
+												
 														<img
-															style={{ width: 120, height: 80 }}
+															style={{ width: 100, height: 80 }}
 															src={item.imgStat}
 															alt='This is a background'
 															className='img-fluid'
 
-														/>{' '}
+														/>
+													</td>
+													<td
+														style={{
+															padding: '10px',
+														}}>
+												
 														<img
-															style={{ width: 120, height: 80 }}
+															style={{ width: 100, height: 80 }}
 															src={item.imgNif}
 															alt='This is a background'
 															className='img-fluid'
@@ -144,18 +131,41 @@ export const Organisation = () => {
 													{type === 'in-process' && (
 														<td>
 															<button
-																className='btn btn-primary btn-sm'
-																type='button'
+																  className='btn btn-primary btn-sm'
+  																type='button'
 																onClick={() => acceptOrganisation(item.id)}
-																disabled={isLoading}>
-																{isLoading && (
+																disabled={isLoading}
+																>
+																{isLoading ? (
 																	<span
-																		className='spinner-border spinner-border-sm'
-																		role='status'
-																		aria-hidden='true'></span>
+																	className='spinner-border spinner-border-sm'
+																	role='status'
+																	aria-hidden='true'
+																	></span>
+																) : (
+																	<FontAwesomeIcon icon={faCheck} /> // Icône ajoutée ici
 																)}
 																ACCEPTER
 															</button>
+															<button
+															className='btn btn-danger btn-sm'
+															type='button'
+															onClick={() => acceptOrganisation(item.id)}
+															disabled={isLoading}
+															>
+															{isLoading ? (
+																<span
+																className='spinner-border spinner-border-sm'
+																role='status'
+																aria-hidden='true'
+																></span>
+															) : (
+																<FontAwesomeIcon icon={faCheck} /> // Icône ajoutée ici
+															)}
+															REJETER
+															</button>
+
+	
 														</td>
 													)}
 												</tr>

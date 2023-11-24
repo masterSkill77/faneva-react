@@ -10,6 +10,7 @@ const Inscription  = () => {
 
   const [formData, setFormData] = useState({
     email: '',
+    email_org: '',
     password: '',
     nom: '',
     type: '1',
@@ -27,6 +28,8 @@ const Inscription  = () => {
     logo: null,
     imageStat: null,
     imageNif: null,
+    role: '',
+    status: ''
   });
 
   const handleFileChange = (e) => {
@@ -47,12 +50,14 @@ const Inscription  = () => {
   const signUp = async () => {
     try {
       const formDataToSend = new FormData();
-
-      formDataToSend.append("email_org", formData.email);
+      const role = 756;
+      const status = 0;
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("email_org", formData.email_org);
       formDataToSend.append("password", formData.password);
       formDataToSend.append("nom_org", formData.nom);
       formDataToSend.append("type_org", formData.type);
-      formDataToSend.append("sect_act", formData.sectAct);
+      formDataToSend.append("secteur_activite_id", formData.sectAct);
       formDataToSend.append("province", formData.province);
       formDataToSend.append("region", formData.region);
       formDataToSend.append("code_postal", formData.codePostal);
@@ -66,9 +71,11 @@ const Inscription  = () => {
       formDataToSend.append("logo_org", formData.logo);
       formDataToSend.append("imgStat", formData.imageStat);
       formDataToSend.append("imgNif", formData.imageNif);
+       formDataToSend.append("role", formData.role);
+      formDataToSend.append("status", formData.status);
       console.log(formDataToSend);
       // ... ajouter les autres champs ici
-      const response = await axios.post('http://127.0.0.1:8000/api/demande', formDataToSend);
+      const response = await axios.post(`http://127.0.0.1:8000/api/register/organisation`, formDataToSend);
       console.log("Réponse de l'API :", response.data);
     } catch (error) {
       console.error("Erreur lors de la requête :", error);
@@ -143,6 +150,19 @@ const StepOne = ({ formData, setFormData }) => {
           type="email" 
           label = "Email"
           value={formData.email} 
+          onChange={handleChange} 
+          fullWidth 
+        />
+      </FormControl>
+
+      <FormControl fullWidth margin="normal">
+        
+        <TextField 
+          id="emailorg" 
+          name="emailorg" 
+          type="email" 
+          label = "Emailorg"
+          value={formData.email_org} 
           onChange={handleChange} 
           fullWidth 
         />
