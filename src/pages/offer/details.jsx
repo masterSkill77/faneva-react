@@ -1,16 +1,28 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { OfferService } from '../../services/offer.service';
+import { CandidaturesDetails } from '../../components/generals/candidatures/details';
 
 export const OfferDetails = () => {
 	const { offerId } = useParams();
 	const [offer, setOffer] = useState();
-	const STATUT = { en_attente: 'En attente', validée: 'Validée' };
+
+	const validateCandidature = async (candidatureId) => {
+		await OfferService()
+			.acceptCandidature(candidatureId)
+			.then((data) => window.location.reload())
+			.catch((e) => alert(e.response.data.message));
+	};
+	const rejectCandidature = async (candidatureId) => {
+		await OfferService()
+			.rejectCandidature(candidatureId)
+			.then((data) => window.location.reload())
+			.catch((e) => alert(e.response.data.message));
+	};
 	useEffect(() => {
 		OfferService()
 			.getOfferById(offerId)
 			.then(({ data }) => {
-				console.log(data);
 				setOffer(data);
 			});
 	}, []);
@@ -46,50 +58,12 @@ export const OfferDetails = () => {
 							</thead>
 							<tbody>
 								{offer.candidatures.map((candidature, index) => (
-									<tr key={candidature + '_' + index}>
-										<td>{candidature.id}</td>
-										<td>
-											{candidature.candidate.firstname_candidate}{' '}
-											{candidature.candidate.name_candidate}
-										</td>
-										<td>
-											<a
-												rel='noreferrer'
-												href={`http://127.0.0.1:8000/storage/${candidature.cv.replace(
-													'public/',
-													''
-												)}`}
-												target='_blank'>
-												Curriculum vitae
-											</a>
-										</td>
-										<td>
-											<a
-												rel='noreferrer'
-												href={`http://127.0.0.1:8000/storage/${candidature.lm.replace(
-													'public/',
-													''
-												)}`}
-												target='_blank'>
-												Lettre de motivation
-											</a>
-										</td>
-										<td>{STATUT[candidature.etat_candidature]}</td>
-										<td>
-											{candidature.etat_candidature === 'en_attente' && (
-												<>
-													<button
-														className='btn btn-sm btn-success'
-														style={{ marginRight: '5px' }}>
-														ACCEPTER
-													</button>
-													<button className='btn btn-sm btn-danger'>
-														REJETER
-													</button>
-												</>
-											)}
-										</td>
-									</tr>
+									<CandidaturesDetails
+										key={candidature + '_' + index}
+										candidature={candidature}
+										rejectCandidature={rejectCandidature}
+										validateCandidature={validateCandidature}
+									/>
 								))}
 							</tbody>
 						</table>
