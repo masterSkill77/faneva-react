@@ -62,7 +62,7 @@ export const Login = () => {
 								<div className='text-center mt-4 fw-light'>
 									Je n'ai pas de compte?{' '}
 									<a href='inscription' className='text-primary'>
-										Créer
+										S'inscrire en tant que organisation
 									</a>
 								</div>
 							</form>
