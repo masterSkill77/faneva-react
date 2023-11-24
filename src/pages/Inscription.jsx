@@ -47,61 +47,76 @@ const Inscription = () => {
   };
 
   const signUp = async () => {
+
+    const formDataToSend = new FormData();
+    let role = 756;
+    let status = 0;
+    formDataToSend.append("email_org", formData.email_org);
+    formDataToSend.append("password", formData.password);
+    formDataToSend.append("nom_org", formData.nom);
+    formDataToSend.append("type_org", formData.type);
+    formDataToSend.append("telephone_org", formData.phone);
+    formDataToSend.append("siteweb_org", formData.site);
+    formDataToSend.append("date_creation", formData.dateCreation);
+    formDataToSend.append("num_nif", formData.numNif);
+    formDataToSend.append("num_stat", formData.numStat);
+    formDataToSend.append("statut_legal_org", formData.statutLegal);
+    formDataToSend.append("logo_org", formData.logo);
+    formDataToSend.append("imgStat", formData.imageStat);
+    formDataToSend.append("imgNif", formData.imageNif);
+    formDataToSend.append("province", formData.province);
+    formDataToSend.append("region", formData.region);
+    formDataToSend.append("code_postal", formData.codePostal);
+    formDataToSend.append("adresse", formData.adresse);
+    formDataToSend.append("email", formData.email);
+    // 
+    formDataToSend.append("role", role);
+    formDataToSend.append("status", status);
+    formDataToSend.append("secteur_activite_id", formData.sectAct);
+
+    console.log(formDataToSend.get("email_org"));
+    console.log(formDataToSend.get("password"));
+    console.log(formDataToSend.get("nom_org"));
+    console.log(formDataToSend.get("type_org"));
+    console.log(formDataToSend.get("telephone_org"));
+    console.log(formDataToSend.get("siteweb_org"));
+    console.log(formDataToSend.get("date_creation"));
+    console.log(formDataToSend.get("num_nif"));
+    console.log(formDataToSend.get("num_stat"));
+    console.log(formDataToSend.get("statut_legal_org"));
+    console.log(formDataToSend.get("logo_org"));
+    console.log(formDataToSend.get("imgStat"));
+    console.log(formDataToSend.get("imgNif"));
+    console.log(formDataToSend.get("province"));
+    console.log(formDataToSend.get("region"));
+    console.log(formDataToSend.get("code_postal"));
+    console.log(formDataToSend.get("adresse"));
+    console.log(formDataToSend.get("email"));
+    console.log(formDataToSend.get("role"));
+    console.log(formDataToSend.get("status"));
+    console.log(formDataToSend.get("secteur_activite_id"));
+
     try {
-      const formDataToSend = new FormData();
-      let role = 756;
-      let status = 0;
-      formDataToSend.append("email_org", formData.email_org);
-      formDataToSend.append("password", formData.password);
-      formDataToSend.append("nom_org", formData.nom);
-      formDataToSend.append("type_org", formData.type);
-      formDataToSend.append("telephone_org", formData.phone);
-      formDataToSend.append("siteweb_org", formData.site);
-      formDataToSend.append("date_creation", formData.dateCreation);
-      formDataToSend.append("num_nif", formData.numNif);
-      formDataToSend.append("num_stat", formData.numStat);
-      formDataToSend.append("statut_legal_org", formData.statutLegal);
-      formDataToSend.append("logo_org", formData.logo);
-      formDataToSend.append("imgNif", formData.imageNif);
-      formDataToSend.append("province", formData.province);
-      formDataToSend.append("region", formData.region);
-      formDataToSend.append("code_postal", formData.codePostal);
-      formDataToSend.append("adresse", formData.adresse);
-      formDataToSend.append("email", formData.email);
-      // formDataToSend.append("imgStat", formData.imageStat);
-      formDataToSend.append("role", role);
-      formDataToSend.append("status", status);
-      formDataToSend.append("secteur_activite_id", formData.sectAct);
-
-      console.log(formDataToSend.get("email_org"));
-      console.log(formDataToSend.get("password"));
-      console.log(formDataToSend.get("nom_org"));
-      console.log(formDataToSend.get("type_org"));
-      console.log(formDataToSend.get("telephone_org"));
-      console.log(formDataToSend.get("siteweb_org"));
-      console.log(formDataToSend.get("date_creation"));
-      console.log(formDataToSend.get("num_nif"));
-      console.log(formDataToSend.get("num_stat"));
-      console.log(formDataToSend.get("statut_legal_org"));
-      console.log(formDataToSend.get("logo_org"));
-      console.log(formDataToSend.get("imgNif"));
-      console.log(formDataToSend.get("province"));
-      console.log(formDataToSend.get("region"));
-      console.log(formDataToSend.get("code_postal"));
-      console.log(formDataToSend.get("adresse"));
-      console.log(formDataToSend.get("email"));
-      console.log(formDataToSend.get("role"));
-      console.log(formDataToSend.get("status"));
-      console.log(formDataToSend.get("secteur_activite_id"));
-
-
-      // ... ajouter les autres champs ici
       const response = await axios.post(`http://127.0.0.1:8000/api/register/organisation`, formDataToSend);
-      console.log("Réponse de l'API :", response.data);
-    } catch (error) {
 
+      console.log("Réponse de l'API :", response.data);
+
+      // Vérifier si la demande a réussi (vous pouvez ajuster cela en fonction de la structure de la réponse de votre API)
+      if (response.status === 200) {
+        alert("votre compte a été créée");
+        window.location.href = '/';
+      } else {
+
+        alert("Vérifier tous les donnée");
+
+      }
+
+    } catch (error) {
+      // Gérer les erreurs qui peuvent survenir pendant la requête
       console.error("Erreur lors de la requête :", error);
     }
+
+
   };
 
   return (
@@ -446,6 +461,15 @@ const StepFour = ({ formData, setFormData, signUp }) => {
         />
       </FormControl>
 
+      <FormControl fullWidth margin="normal">
+        <FormHelperText>Image Statistique</FormHelperText>
+        <TextField
+          type="file"
+          name="imageStat"
+          onChange={handleChange}
+          fullWidth
+        />
+      </FormControl>
       <FormControl fullWidth margin="normal">
         <FormHelperText>Image NIF</FormHelperText>
         <TextField
