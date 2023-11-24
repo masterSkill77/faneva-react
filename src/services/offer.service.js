@@ -9,5 +9,8 @@ export const OfferService = () => {
 	const postOffer = async (editorId, data) => {
 		return await http.post(`/editor/${editorId}/offre`, data);
 	};
-	return { getAllOffers, getOffersByEditor, postOffer };
+	const getOfferById = async (offerId) => {
+		return await http.get('/offer/' + offerId);
+	};
+	return { getAllOffers, getOffersByEditor, getOfferById, postOffer };
 };

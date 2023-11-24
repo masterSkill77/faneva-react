@@ -6,6 +6,7 @@ import { OfferList } from '../pages/offer/list';
 import { OfferCreate } from '../pages/offer/create';
 
 import Inscription from '../pages/Inscription';
+import { OfferDetails } from '../pages/offer/details';
 const router = createBrowserRouter([
 	{
 		path: '/',
@@ -30,7 +31,11 @@ const router = createBrowserRouter([
 	{
 		path: '/offer/create',
 		element: <OfferCreate />,
-    },
+	},
+	{
+		path: '/offer/details/:offerId',
+		element: <OfferDetails />,
+	},
 	{
 		path: '/inscription',
 		element: <Inscription />,
