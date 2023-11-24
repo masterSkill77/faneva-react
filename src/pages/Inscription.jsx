@@ -7,6 +7,7 @@ import './Registre.css';
 const steps = ['Étape 1', 'Étape 2', 'Étape 3', 'Étape 4'];
 const Inscription = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     email_org: '',
@@ -97,6 +98,9 @@ const Inscription = () => {
     console.log(formDataToSend.get("secteur_activite_id"));
 
     try {
+      // Mettez à jour l'état de chargement pour activer le loader
+      setLoading(true);
+
       const response = await axios.post(`http://127.0.0.1:8000/api/register/organisation`, formDataToSend);
 
       console.log("Réponse de l'API :", response.data);
@@ -106,17 +110,15 @@ const Inscription = () => {
         alert("votre compte a été créée");
         window.location.href = '/';
       } else {
-
         alert("Vérifier tous les donnée");
-
       }
-
     } catch (error) {
       // Gérer les erreurs qui peuvent survenir pendant la requête
-      console.error("Erreur lors de la requête :", error);
+      alert("Vérifier tous les donnée");
+    } finally {
+      // Mettez à jour l'état de chargement pour désactiver le loader
+      setLoading(false);
     }
-
-
   };
 
   return (
@@ -147,8 +149,8 @@ const Inscription = () => {
               Précédent
             </Button>
             {activeStep === 3 && (
-              <Button variant="contained" onClick={signUp}>
-                Enregistrer
+              <Button variant="contained" onClick={signUp} disabled={loading}>
+                {loading ? 'Chargement...' : 'Enregistrer'}
               </Button>
             )}
             {activeStep !== 3 && (
