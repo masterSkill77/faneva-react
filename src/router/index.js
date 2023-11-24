@@ -7,17 +7,23 @@ import { OfferCreate } from '../pages/offer/create';
 import homeImage from '../router/Welcome.png';
 import Inscription from '../pages/Inscription';
 import { OfferDetails } from '../pages/offer/details';
+import 'hover.css';
 const router = createBrowserRouter([
-	 {
-    path: '/',
-    element: (
-      <div>
-       
-        <img src={homeImage} alt="Home" width="800" height="300"/>
-      </div>
-    ),
-  },
-  // ... autres routes ...
+	{
+		path: '/',
+		element: (
+			<div className='text-center'>
+				<img
+					src={homeImage}
+					alt='Home'
+					className='hvr-pulse'
+					width='800'
+					height='300'
+				/>
+			</div>
+		),
+	},
+	// ... autres routes ...
 	{
 		path: '/organisation/:type',
 		element: <Organisation />,
